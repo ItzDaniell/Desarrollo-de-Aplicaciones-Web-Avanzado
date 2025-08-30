@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{welcomeMessage}}</h1>
+
+    <h2>Lista de Estudiantes</h2>
+    <table border="1">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nota</th>
+      </tr>
+      {{#each studentsWithState}}
+        <tr>
+          <td>{{this.firstName}}</td>
+          <td>{{this.lastName}}</td>
+          <td>{{#if this.aprobado}}<strong
+              >{{this.note}}</strong>{{else}}{{this.note}}{{/if}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </body>
+</html>

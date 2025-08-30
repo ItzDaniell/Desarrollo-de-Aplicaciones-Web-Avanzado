@@ -1,18 +1,17 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{title}}</title>
+  </head>
+  <body>
     <h1>{{welcomeMessage}}</h1>
-    <p>Hoy es {{ day }}</p>
+    <p>Hoy es {{day}}</p>
 
     <h2>Lista de Estudiantes</h2>
     <ul>
-        {{#each students}}
-            <li>{{this}}</li>
-        {{/each}}
+      {{#each students}}
+        <li>{{this}}</li>
+      {{/each}}
     </ul>
-</body>
+  </body>
 </html>
