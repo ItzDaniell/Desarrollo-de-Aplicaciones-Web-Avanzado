@@ -7,6 +7,46 @@
       "status": "nuevo",
       "priority": "medium",
       "assignedUser": null
+    },
+    {
+      "id": "da416893-715f-4e6f-a799-7c4dca03a316",
+      "title": "Problema 1",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "12a9edb5-198c-4dd7-b1d6-c053ec02d60a",
+      "title": "Problema 1",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "f186f618-6a0a-4ad6-a931-88f2f3c0d785",
+      "title": "Problema 1",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "f80c1142-58d0-482a-954c-75d62aa4cc21",
+      "title": "Problema 2",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    },
+    {
+      "id": "7470b492-2ff8-4fbb-bcc2-5ca35fb214e6",
+      "title": "Problema 3",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
     }
   ],
   "notifications": [
@@ -37,6 +77,41 @@
       "message": "Nuevo ticket creado: Problema 1",
       "status": "pending",
       "ticketId": "a72a0e15-1f63-4265-bb94-24271d0edb36"
+    },
+    {
+      "id": "5f6c8a36-3502-4e41-9412-2a690139ead7",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "da416893-715f-4e6f-a799-7c4dca03a316"
+    },
+    {
+      "id": "5a04f4ca-1cae-45cf-bc1c-30da1411d58e",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "12a9edb5-198c-4dd7-b1d6-c053ec02d60a"
+    },
+    {
+      "id": "b5cdd07d-e55b-49b1-83e7-755659c9e083",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "f186f618-6a0a-4ad6-a931-88f2f3c0d785"
+    },
+    {
+      "id": "d56f8a4b-755c-4e62-b96d-2a0d025149c6",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 2",
+      "status": "pending",
+      "ticketId": "f80c1142-58d0-482a-954c-75d62aa4cc21"
+    },
+    {
+      "id": "d125a448-66cf-4e04-b8e5-ae4868fc55d3",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 3",
+      "status": "pending",
+      "ticketId": "7470b492-2ff8-4fbb-bcc2-5ca35fb214e6"
     }
   ]
 }

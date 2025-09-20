@@ -7,7 +7,10 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
-  res.status(200).json(service.list());
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  
+  res.status(200).json(service.list({ page, limit }));
 };
 
 exports.assign = (req, res) => {
@@ -35,3 +38,9 @@ exports.delete = (req, res) => {
   }
 }
 
+exports.getNotifications = (req, res) => {
+  const { id } = req.params;
+  const notifications = service.getTicketNotifications(id);
+  if (notifications === null) return res.status(404).json({ error: "Ticket no encontrado" });
+  res.status(200).json(notifications);
+};
