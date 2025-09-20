@@ -1,5 +1,14 @@
 {
-  "tickets": [],
+  "tickets": [
+    {
+      "id": "a72a0e15-1f63-4265-bb94-24271d0edb36",
+      "title": "Problema 1",
+      "description": "Ocurrió un error en el sistema",
+      "status": "nuevo",
+      "priority": "medium",
+      "assignedUser": null
+    }
+  ],
   "notifications": [
     {
       "id": "c755f41f-45e6-415b-a10e-e86013e9ae46",
@@ -21,6 +30,13 @@
       "message": "El ticket c8b178f1-2919-4c0c-9ef7-bfa1c77bfaed cambió a asignado",
       "status": "pending",
       "ticketId": "c8b178f1-2919-4c0c-9ef7-bfa1c77bfaed"
+    },
+    {
+      "id": "913ade8b-fad8-4b31-8917-6e63ba776fce",
+      "type": "email",
+      "message": "Nuevo ticket creado: Problema 1",
+      "status": "pending",
+      "ticketId": "a72a0e15-1f63-4265-bb94-24271d0edb36"
     }
   ]
 }
