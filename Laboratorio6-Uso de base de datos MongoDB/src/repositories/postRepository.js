@@ -9,6 +9,10 @@ class PostRepository {
         return await Post.find().populate("user");
     }
 
+    async findById(id) {
+        return await Post.findById(id).populate("user");
+    }
+
     async findByUser(userId) {
         return await Post.find({ user: userId }).populate("user");
     }

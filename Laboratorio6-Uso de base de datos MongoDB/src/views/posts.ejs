@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media - Post</title>
+  <!-- Importar Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <!-- Iconos de Google -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="grey lighten-4">
+
+  <!-- Navbar -->
+  <nav class="teal">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">Social Media</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/posts/create"><i class="material-icons left">add</i>Nuevo Post</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="section">
+      <div class="row" style="margin-bottom: 0;">
+        <div class="col s12" style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+          <h4 class="" style="margin: 16px 0;">Feed</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Grid de posts -->
+        <% posts.forEach(function(post){ %>
+          <div class="col s12 m6 l4">
+            <div class="card hoverable">
+              <div class="card-image">
+                <img src="<%= post.imageUrl || 'https://via.placeholder.com/800x450?text=Sin+Imagen' %>" alt="Imagen del post">
+              </div>
+              <div class="card-content">
+                <span class="card-title truncate" title="<%= post.title %>"><%= post.title %></span>
+                <p class="grey-text text-darken-2" style="min-height: 48px;">
+                  <%= post.content %>
+                </p>
+                <% const tags = Array.isArray(post.hastags) ? post.hastags : (post.hastags ? [post.hastags] : []); %>
+                <div style="margin-top:8px;">
+                  <% if (tags.length) { %>
+                    <% tags.forEach(function(t){ %>
+                      <span class="chip"><%= t %></span>
+                    <% }) %>
+                  <% } else { %>
+                    <span class="grey-text">Sin hashtags</span>
+                  <% } %>
+                </div>
+                <p class="grey-text" style="margin-top:8px;">
+                  <small>Creado: <%= new Date(post.createAt).toLocaleString() %></small>
+                </p>
+              </div>
+              <div class="card-action" style="display:flex; justify-content:space-between; align-items:center;">
+                <span><strong>Autor:</strong>
+                  <% if (post.user && post.user.name) { %>
+                    <%= post.user.name %>
+                  <% } else if (post.user && post.user.email) { %>
+                    <%= post.user.email %>
+                  <% } else if (post.user) { %>
+                    <%= post.user %>
+                  <% } else { %>
+                    <span class="grey-text">Desconocido</span>
+                  <% } %>
+                </span>
+                <div class="right" style="display:flex; gap:8px; align-items:center;">
+                  <a href="/posts/<%= post._id %>/edit" class="btn-flat" title="Editar"><i class="material-icons teal-text">edit</i></a>
+                  <form action="/posts/<%= post._id %>/delete" method="post" onsubmit="return confirm('¿Eliminar este post?');">
+                    <button type="submit" class="btn-flat" title="Eliminar">
+                      <i class="material-icons red-text">delete</i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importar Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

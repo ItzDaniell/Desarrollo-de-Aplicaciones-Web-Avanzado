@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-    title: String,
-    content: String,
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    title: { type: String, minlength: 5, maxlength: 30, required: true },
+    content: { type: String, minlength: 10, required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    hastags: [String],
+    imageUrl: String,
+    createAt: { type: Date, default: Date.now }
 });
 
 export default mongoose.model("Post", postSchema);

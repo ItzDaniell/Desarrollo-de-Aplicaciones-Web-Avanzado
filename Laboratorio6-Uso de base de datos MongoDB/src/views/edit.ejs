@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Post</title>
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+    <div class="container">
+      <div class="section">
+        <div class="row" style="margin-bottom: 0;">
+          <div class="col s12" style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <h4 style="margin: 16px 0;">Editar Post</h4>
+            <a href="/posts" class="btn-flat"><i class="material-icons left">arrow_back</i> Volver</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Modificar datos</span>
+                <form action="/posts/<%= post._id %>/update" method="post">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="title" name="title" type="text" class="validate" value="<%= post ? post.title : '' %>" maxlength="30" required>
+                      <label class="active" for="title">Título</label>
+                      <span class="helper-text">Entre 5 y 30 caracteres</span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="content" name="content" class="materialize-textarea" minlength="10" required><%= post ? post.content : '' %></textarea>
+                      <label class="active" for="content">Contenido</label>
+                      <span class="helper-text">Mínimo 10 caracteres</span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <label class="active" for="hastags">Hashtag</label>
+                      <select name="hastags" id="hastags" class="browser-default">
+                        <% const available = ['node', 'javascript', 'mongodb', 'express', 'web']; %>
+                        <% const selectedValue = (post && Array.isArray(post.hastags)) ? post.hastags[0] : (post && typeof post.hastags === 'string' ? post.hastags : ''); %>
+                        <option value="">-- Selecciona un hashtag --</option>
+                        <% available.forEach(function(tag){ %>
+                          <option value="<%= tag %>" <%= selectedValue === tag ? 'selected' : '' %>><%= tag %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="imageUrl" name="imageUrl" type="url" class="validate" value="<%= post ? post.imageUrl : '' %>" placeholder="https://...">
+                      <label class="active" for="imageUrl">URL de la imagen</label>
+                      <span class="helper-text">Opcional</span>
+                    </div>
+                  </div>
+
+                  <div class="row" style="display:flex; justify-content:flex-end; gap:8px;">
+                    <a href="/posts" class="btn-flat">Cancelar</a>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Actualizar
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+</body>
+</html>
