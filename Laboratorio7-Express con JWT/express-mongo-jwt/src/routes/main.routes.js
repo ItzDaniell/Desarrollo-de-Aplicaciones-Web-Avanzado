@@ -6,9 +6,11 @@ import UserService from '../services/UserService.js';
 
 const router = express.Router();
 
-router.get('/', MainController.getSignUp);
-router.get('/signin', MainController.getSignIn);
+router.get('/', MainController.getIndex);
 
+router.get('/signup', MainController.getSignUp);
+
+router.get('/signin', MainController.getSignIn);
 
 router.get('/dashboard', authenticate, MainController.getDashboard);
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plataforma Web</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="grey lighten-4">
+
+  <nav class="blue darken-2">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">Mi Plataforma</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/signin"><i class="material-icons left">login</i>Iniciar Sesión</a></li>
+        <li><a href="/signup"><i class="material-icons left">person_add</i>Registrarse</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="section center-align" style="padding: 80px 20px;">
+    <h3 class="blue-text text-darken-2">Bienvenido a la Plataforma Web</h3>
+    <p class="flow-text">Gestiona tu cuenta, accede a tu panel y descubre las funcionalidades según tu rol.</p>
+    <div style="margin-top: 40px;">
+      <a href="/signin" class="btn-large blue darken-2 waves-effect waves-light">Iniciar Sesión</a>
+      <a href="/signup" class="btn-large grey lighten-2 black-text waves-effect">Registrarse</a>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 60px;">
+    <div class="row">
+      <div class="col s12 m4 center">
+        <i class="material-icons large blue-text">security</i>
+        <h5>Seguridad</h5>
+        <p>Protección con autenticación JWT para mantener tus datos seguros.</p>
+      </div>
+      <div class="col s12 m4 center">
+        <i class="material-icons large blue-text">dashboard</i>
+        <h5>Panel Personalizado</h5>
+        <p>Accede a tu dashboard según tu rol y gestiona tu información fácilmente.</p>
+      </div>
+      <div class="col s12 m4 center">
+        <i class="material-icons large blue-text">group</i>
+        <h5>Comunidad</h5>
+        <p>Únete a nuestra plataforma y colabora con otros usuarios registrados.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer blue darken-2" style="margin-top: 80px;">
+    <div class="container center-align">
+      © <%= new Date().getFullYear() %> Plataforma Web | Todos los derechos reservados
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
