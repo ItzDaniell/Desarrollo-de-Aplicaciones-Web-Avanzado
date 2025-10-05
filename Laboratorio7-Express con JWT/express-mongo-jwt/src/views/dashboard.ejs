@@ -1,23 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Admin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav>
-        <div class="nav-wrapper red">
-            <a href="#" class="brand-logo center">Dashboard Admin</a>
-        </div>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="grey lighten-4">
+    <nav class="blue darken-2">
+      <div class="nav-wrapper container">
+        <a href="/dashboard" class="brand-logo">Dashboard</a>
+        <ul id="nav-desktop" class="right">
+          <% if (role === 'admin') { %>
+          <li><a href="/dashboardAdmin">Usuarios</a></li>
+          <% } %> <% if (role === 'user' || role === 'admin') { %>
+          <li><a href="/profile">Perfil</a></li>
+          <li><a href="#">Cerrar sesión</a></li>
+          <% } %>
+        </ul>
+      </div>
     </nav>
-    <div class="container">
-        <div class="section">
-            <h5>Bienvenido al Dashboard de Administrador</h5>
-            <p>Aquí puedes gestionar usuarios y acceder a funcionalidades administrativas.</p>
-            <!-- Puedes agregar tarjetas, tablas, etc. aquí -->
+
+    <div class="container" style="margin-top: 60px">
+      <div class="card z-depth-2">
+        <div class="card-content center-align">
+          <span class="card-title blue-text text-darken-2">¡Bienvenido!</span>
         </div>
+      </div>
+
+      <div class="row" style="margin-top: 40px">
+        <% if (role === 'admin') { %>
+        <div class="col s6">
+          <div class="card hoverable">
+            <div class="card-content">
+              <span class="card-title"
+                ><i class="material-icons left">group</i>Gestión de
+                Usuarios</span
+              >
+              <p>Administra los usuarios registrados en el sistema.</p>
+            </div>
+            <div class="card-action">
+              <a href="/dashboardAdmin" class="blue-text">Ir al panel</a>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <div class="col s6">
+          <div class="card hoverable">
+            <div class="card-content">
+              <span class="card-title"
+                ><i class="material-icons left">person</i>Perfil</span
+              >
+              <p>Consulta y actualiza tu información personal.</p>
+            </div>
+            <div class="card-action">
+              <a href="/profile" class="blue-text">Ver perfil</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <footer class="page-footer blue darken-2" style="margin-top: 80px">
+      <div class="container center-align">
+        © <%= new Date().getFullYear() %> Plataforma Web | Todos los derechos
+        reservados
+      </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
+  </body>
 </html>

@@ -1,9 +1,19 @@
 import userRepository from '../repositories/UserRepository.js';
 
 class UserService {
-
     async getAll() {
-        return userRepository.getAll();
+        const users = await userRepository.getAll();
+        return users.map(user => ({
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            birthDate: user.birthDate,
+            url_profile: user.url_profile,
+            adress: user.adress,
+            roles: user.roles.map(r => r.name)
+        }));
     }
 
     async getById(id) {
@@ -17,6 +27,11 @@ class UserService {
             id: user._id,
             email: user.email,
             name: user.name,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            birthDate: user.birthDate,
+            url_profile: user.url_profile,
+            adress: user.adress,
             roles: user.roles.map(r => r.name)
         };
     }

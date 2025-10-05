@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/users.routes.js";
 import seedRoles from "./utils/seedRoles.js";
 import mainRoutes from "./routes/main.routes.js";
+import seedAdminUser from "./utils/seedAdminUser.js";
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ mongoose
   .then(async () => {
     console.log("Mongo connected");
     await seedRoles();
+    await seedAdminUser();
     app.listen(PORT, () =>
       console.log(`Servidor corriendo en el puerto ${PORT}`)
     );
