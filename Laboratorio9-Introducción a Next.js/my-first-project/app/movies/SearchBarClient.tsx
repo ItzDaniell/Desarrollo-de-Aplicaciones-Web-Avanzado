@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios'
 import { useEffect, useMemo, useState } from 'react'
 import MovieList from './components/MovieList'
 import { Movie, MovieDetail } from './interface/movieInterface'
@@ -36,8 +37,8 @@ const SearchBar = ({ initialMovies }: Props) => {
       if (debouncedQuery) url.searchParams.set('s', debouncedQuery)
       if (debouncedYear) url.searchParams.set('y', debouncedYear)
       try {
-        const res = await fetch(url.toString())
-        const data = await res.json()
+        const res = await axios.get(url.toString())
+        const data = res.data
         if (data.Response === 'True' && Array.isArray(data.Search)) {
           setResults(data.Search)
         } else {
@@ -53,11 +54,11 @@ const SearchBar = ({ initialMovies }: Props) => {
   const openModal = async (movie: Movie) => {
     setSelected(movie)
     setOpen(true)
-    // fetch details by id
+
     try {
       const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}`
-      const res = await fetch(url)
-      const data = await res.json()
+      const res = await axios.get(url)
+      const data = res.data
       if (data && data.Response !== 'False') {
         setDetail({
           Title: data.Title,
@@ -96,9 +97,6 @@ const SearchBar = ({ initialMovies }: Props) => {
             className="sm:col-span-2 w-full h-11 rounded-md border border-foreground/20 bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20"
           />
         </div>
-        <p className="mt-2 text-xs text-foreground/60">
-          General: https://www.omdbapi.com/?apikey={API_KEY}&s=marvel — Por título y año: &t=suits&y=2012 — Por ID: &i=tt3784006
-        </p>
       </div>
 
       <div className="mx-auto max-w-6xl px-6 py-6">
