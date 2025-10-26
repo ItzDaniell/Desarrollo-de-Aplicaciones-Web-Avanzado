@@ -3,6 +3,8 @@ import { Character } from "@/types/rickandmorty";
 import { notFound } from "next/navigation";
 
 export const revalidate = 864000;
+export const dynamicParams = true;
+export const dynamic = 'force-dynamic';
 
 async function fetchWithRetry(url: string, init: RequestInit, retries = 2): Promise<Response> {
   let lastErr: any;
@@ -40,21 +42,6 @@ async function getCharacter(id: string): Promise<Character> {
   return res.json();
 }
 
-export async function generateStaticParams() {
-  const first = await fetch("https://rickandmortyapi.com/api/character").then((r) => r.json());
-  const pages: number = first.info.pages;
-  const limit = process.env.NODE_ENV === "development" ? Math.min(2, pages) : pages;
-  const ids: { id: string }[] = [];
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-  for (let i = 1; i <= limit; i++) {
-    const page = await fetch(`https://rickandmortyapi.com/api/character?page=${i}`).then((r) => r.json());
-    ids.push(
-      ...page.results.map((c: Character) => ({ id: String(c.id) }))
-    );
-    if (i < limit) await sleep(150);
-  }
-  return ids;
-}
 
 export default async function RMDetailById({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
