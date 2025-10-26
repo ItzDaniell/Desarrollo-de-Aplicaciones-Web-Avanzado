@@ -44,9 +44,15 @@ export async function generateStaticParams() {
   const first = await fetch("https://rickandmortyapi.com/api/character").then((r) => r.json());
   const pages: number = first.info.pages;
   const limit = process.env.NODE_ENV === "development" ? Math.min(2, pages) : pages;
-  const urls = Array.from({ length: limit }, (_, i) => `https://rickandmortyapi.com/api/character?page=${i + 1}`);
-  const all = await Promise.all(urls.map((u) => fetch(u).then((r) => r.json())));
-  const ids = all.flatMap((p: any) => p.results.map((c: Character) => ({ id: String(c.id) })));
+  const ids: { id: string }[] = [];
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  for (let i = 1; i <= limit; i++) {
+    const page = await fetch(`https://rickandmortyapi.com/api/character?page=${i}`).then((r) => r.json());
+    ids.push(
+      ...page.results.map((c: Character) => ({ id: String(c.id) }))
+    );
+    if (i < limit) await sleep(150);
+  }
   return ids;
 }
 

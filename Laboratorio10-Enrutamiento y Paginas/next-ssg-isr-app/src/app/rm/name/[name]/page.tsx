@@ -15,9 +15,15 @@ async function getByName(name: string): Promise<Character | null> {
 export async function generateStaticParams() {
   const first = await fetch("https://rickandmortyapi.com/api/character").then((r) => r.json());
   const pages: number = first.info.pages;
-  const urls = Array.from({ length: pages }, (_, i) => `https://rickandmortyapi.com/api/character?page=${i + 1}`);
-  const all = await Promise.all(urls.map((u) => fetch(u).then((r) => r.json())));
-  const names = all.flatMap((p: any) => p.results.map((c: Character) => ({ name: c.name })));
+  const envLimit = Number(process.env.RM_PREGEN_LIMIT || '0');
+  const limitPages = envLimit > 0 ? Math.min(envLimit, pages) : (process.env.NODE_ENV === 'development' ? Math.min(2, pages) : pages);
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  const names: { name: string }[] = [];
+  for (let i = 1; i <= limitPages; i++) {
+    const page = await fetch(`https://rickandmortyapi.com/api/character?page=${i}`).then((r) => r.json());
+    names.push(...page.results.map((c: Character) => ({ name: c.name })));
+    if (i < limitPages) await sleep(150);
+  }
   return names;
 }
 
