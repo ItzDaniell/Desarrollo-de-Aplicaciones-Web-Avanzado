@@ -1,20 +1,8 @@
-// app/products/page.tsx
-export const dynamic = "force-dynamic"; // fuerza SSR (sin caché)
-
-export default async function ProductsPage() {
-  const res = await fetch("https://api.tienda.com/productos", { cache: "no-store" });
-  const productos = await res.json();
-
+export default function NotFound() {
   return (
-    <main>
-      <h1>Productos (Actualiza en cada visita)</h1>
-      <ul>
-        {productos.map((p: any) => (
-          <li key={p.id}>
-            {p.nombre} — ${p.precio}
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div className="p-8 max-w-3xl mx-auto text-center text-white">
+      <h1 className="text-3xl font-bold mb-2">Pokémon no encontrado</h1>
+      <p className="text-zinc-300">Verifica el nombre e intenta nuevamente.</p>
+    </div>
   );
 }
