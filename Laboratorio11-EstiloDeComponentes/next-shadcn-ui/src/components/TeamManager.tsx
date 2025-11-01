@@ -11,7 +11,7 @@ import { getMembers, createMember, updateMember, deleteMember, getProjects } fro
 
 export function TeamManager() {
   const [members, setMembers] = useState<any[]>([])
-  const [form, setForm] = useState({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "", isActive: true })
+  const [form, setForm] = useState({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "none", isActive: true })
   const [editing, setEditing] = useState<string | null>(null)
   const [deleteCandidate, setDeleteCandidate] = useState<string | null>(null)
   const [confirmOpen, setConfirmOpen] = useState(false)
@@ -36,7 +36,7 @@ export function TeamManager() {
     } else {
       createMember({ ...form })
     }
-    setForm({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "", isActive: true })
+    setForm({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "none", isActive: true })
     setEditing(null)
     window.dispatchEvent(new CustomEvent('app-data-changed'))
   }
@@ -50,7 +50,7 @@ export function TeamManager() {
       position: m.position || "",
       phone: m.phone || "",
       birthdate: m.birthdate || "",
-      projectId: m.projectId || "",
+      projectId: m.projectId || "none",
       isActive: m.isActive !== false,
     })
   }
@@ -91,7 +91,7 @@ export function TeamManager() {
                   <SelectValue placeholder="(ninguno)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">(ninguno)</SelectItem>
+                  <SelectItem value="none">(ninguno)</SelectItem>
                   {projects.map((p) => (
                     <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
                   ))}
@@ -122,7 +122,7 @@ export function TeamManager() {
                 <div>
                   <div className="font-medium">{m.name} {m.isActive === false && <span className="text-xs text-red-500">(inactivo)</span>}</div>
                   <div className="text-xs text-muted-foreground">{m.role} • {m.email}</div>
-                  <div className="text-xs text-muted-foreground">{m.position || "-"} • {projects.find((p) => p.id === m.projectId)?.name || "(sin proyecto)"} • {m.birthdate || "-"}</div>
+                  <div className="text-xs text-muted-foreground">{m.position || "-"} • {m.projectId === "none" ? "(sin proyecto)" : projects.find((p) => p.id === m.projectId)?.name || "(sin proyecto)"} • {m.birthdate || "-"}</div>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" onClick={() => startEdit(m)}>Editar</Button>
