@@ -5,25 +5,40 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "./ui/select"
+import { Calendar } from "./ui/calendar"
 import { Checkbox } from "./ui/checkbox"
-import { getMembers, createMember, updateMember, deleteMember, getProjects } from "../lib/data"
+import { getMembers, createMember, updateMember, deleteMember } from "../lib/data"
+import type { Member } from "../lib/data"
+
+interface FormData {
+  name: string
+  email: string
+  role: string
+  position: string
+  phone: string
+  birthdate: Date | undefined
+  isActive: boolean
+}
 
 export function TeamManager() {
-  const [members, setMembers] = useState<any[]>([])
-  const [form, setForm] = useState({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "none", isActive: true })
+  const [members, setMembers] = useState<Member[]>([])
+  const [form, setForm] = useState<FormData>({ 
+    name: "", 
+    email: "", 
+    role: "", 
+    position: "", 
+    phone: "", 
+    birthdate: undefined, 
+    isActive: true 
+  })
   const [editing, setEditing] = useState<string | null>(null)
   const [deleteCandidate, setDeleteCandidate] = useState<string | null>(null)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
-  const [projects, setProjects] = useState<any[]>([])
-
   useEffect(() => {
     setMembers(getMembers())
-    setProjects(getProjects())
     const onChange = () => {
       setMembers(getMembers())
-      setProjects(getProjects())
     }
     window.addEventListener("app-data-changed", onChange)
     return () => window.removeEventListener("app-data-changed", onChange)
@@ -31,27 +46,39 @@ export function TeamManager() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (editing) {
-      updateMember(editing, { ...form })
-    } else {
-      createMember({ ...form })
+    const memberData: Omit<Member, 'userId'> = {
+      ...form,
+      birthdate: form.birthdate?.toISOString().split('T')[0]
     }
-    setForm({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "none", isActive: true })
+    
+    if (editing) {
+      updateMember(editing, memberData)
+    } else {
+      createMember(memberData)
+    }
+    setForm({ 
+      name: "", 
+      email: "", 
+      role: "", 
+      position: "", 
+      phone: "", 
+      birthdate: undefined, 
+      isActive: true 
+    })
     setEditing(null)
     window.dispatchEvent(new CustomEvent('app-data-changed'))
   }
 
-  const startEdit = (m: any) => {
+  const startEdit = (m: Member) => {
     setEditing(m.userId)
     setForm({
-      name: m.name || "",
+      name: m.name,
       email: m.email || "",
       role: m.role || "",
       position: m.position || "",
       phone: m.phone || "",
-      birthdate: m.birthdate || "",
-      projectId: m.projectId || "none",
-      isActive: m.isActive !== false,
+      birthdate: m.birthdate ? new Date(m.birthdate) : undefined,
+      isActive: m.isActive !== false
     })
   }
 
@@ -80,23 +107,15 @@ export function TeamManager() {
               <Label>Teléfono</Label>
               <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
             </div>
+
             <div className="grid gap-2 mb-3">
               <Label>Fecha de nacimiento</Label>
-              <Input type="date" value={form.birthdate} onChange={(e) => setForm({ ...form, birthdate: e.target.value })} />
-            </div>
-            <div className="grid gap-2 mb-3">
-              <Label>Proyecto asignado</Label>
-              <Select value={form.projectId} onValueChange={(v) => setForm({ ...form, projectId: v })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="(ninguno)" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="none">(ninguno)</SelectItem>
-                  {projects.map((p) => (
-                    <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Calendar
+                mode="single"
+                selected={form.birthdate}
+                onSelect={date => setForm({ ...form, birthdate: date })}
+                className="rounded-md border"
+              />
             </div>
             <div className="flex items-center gap-2 mb-3">
               <Checkbox checked={form.isActive} onCheckedChange={(v) => setForm({ ...form, isActive: v === true })} />
@@ -105,7 +124,7 @@ export function TeamManager() {
             <div className="flex gap-2">
               <Button type="submit">{editing ? "Actualizar" : "Crear"}</Button>
               {editing && (
-                <Button type="button" variant="outline" onClick={() => { setEditing(null); setForm({ name: "", email: "", role: "", position: "", phone: "", birthdate: "", projectId: "", isActive: true }) }}>
+                <Button type="button" variant="outline" onClick={() => { setEditing(null); setForm({ name: "", email: "", role: "", position: "", phone: "", birthdate: undefined, isActive: true }) }}>
                   Cancelar
                 </Button>
               )}
@@ -122,7 +141,7 @@ export function TeamManager() {
                 <div>
                   <div className="font-medium">{m.name} {m.isActive === false && <span className="text-xs text-red-500">(inactivo)</span>}</div>
                   <div className="text-xs text-muted-foreground">{m.role} • {m.email}</div>
-                  <div className="text-xs text-muted-foreground">{m.position || "-"} • {m.projectId === "none" ? "(sin proyecto)" : projects.find((p) => p.id === m.projectId)?.name || "(sin proyecto)"} • {m.birthdate || "-"}</div>
+                  <div className="text-xs text-muted-foreground">{m.position || "-"} • {m.birthdate || "-"}</div>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" onClick={() => startEdit(m)}>Editar</Button>
