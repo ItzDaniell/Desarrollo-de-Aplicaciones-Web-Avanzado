@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
@@ -24,7 +24,7 @@ export async function GET() {
     }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const { name, email, bio, nationality, birthDate } = body;
@@ -68,8 +68,7 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(
-    request: Request,
-    { params }: { params: { id: string } }
+    request: NextRequest,
 ) {
     try {
         const body = await request.json();
@@ -87,7 +86,7 @@ export async function PUT(
         }
         
         const author = await prisma.author.update({
-            where: { id: (await params).id },
+            where: { id },
             data: {
                 name,
                 email,
@@ -121,12 +120,13 @@ export async function PUT(
 }
 
 export async function DELETE(
-    request: Request,
-    { params }: { params: { id: string },
-}) {
+    request: NextRequest,
+) {
     try {
+        const body = await request.json();
+        const { id } = body;
         await prisma.author.delete({
-            where: { id: (await params).id },
+            where: { id },
         })
 
         return NextResponse.json(
