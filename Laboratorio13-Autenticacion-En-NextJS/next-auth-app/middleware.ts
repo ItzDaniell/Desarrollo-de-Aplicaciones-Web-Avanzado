@@ -1,3 +1,4 @@
+// middleware.ts
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
@@ -6,8 +7,14 @@ export default withAuth(
     const { pathname } = req.nextUrl;
     const token = req.nextauth.token;
 
-    if (token && (pathname === "/" || pathname.startsWith("/signIn"))) {
+    // Redirigir usuarios autenticados que intentan acceder a rutas de autenticación
+    if (token && (pathname === "/" || pathname.startsWith("/sign"))) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    // Redirigir usuarios no autenticados que intentan acceder a rutas protegidas
+    if (!token && (pathname.startsWith("/dashboard") || pathname.startsWith("/profile"))) {
+      return NextResponse.redirect(new URL("/signIn", req.url));
     }
 
     return NextResponse.next();
@@ -16,10 +23,13 @@ export default withAuth(
     callbacks: {
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl;
-        if (pathname.startsWith("/dashboard") || pathname.startsWith("/profile")) {
-          return !!token;
+        // Rutas públicas que no requieren autenticación
+        const publicPaths = ["/", "/signIn", "/signup", "/api/auth"];
+        if (publicPaths.some((path) => pathname.startsWith(path))) {
+          return true;
         }
-        return true;
+        // Rutas protegidas
+        return !!token;
       },
     },
     pages: {
@@ -28,4 +38,16 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ["/", "/dashboard", "/profile", "/signIn"] };
+export const config = { 
+  matcher: [
+    "/",
+    "/dashboard",
+    "/dashboard/:path*", 
+    "/profile",
+    "/profile/:path*", 
+    "/signIn",
+    "/signIn/:path*",
+    "/signup",
+    "/signup/:path*",
+  ] 
+};

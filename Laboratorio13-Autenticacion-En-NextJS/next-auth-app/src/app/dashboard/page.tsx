@@ -12,12 +12,12 @@ const DashboardPage = async () => {
             <div className="max-w-4xl mx-auto">
                 <div className="bg-white rounded-lg shadow-md p-6">
                     <h1 className="text-3xl font-bold mb-4 text-gray-900">
-                        Dashboard
+                        Panel
                     </h1>
 
                     <div className="mb-6">
                         <p className="text-gray-700 mb-2">
-                            Welcome, {session?.user?.name}!
+                            ¡Bienvenido(a), {session?.user?.name}!
                         </p>
                     </div>
                 </div>

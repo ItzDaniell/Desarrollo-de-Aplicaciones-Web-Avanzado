@@ -7,6 +7,7 @@ import LogoutButton from "@/components/LogoutButton";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import AuthGuard from "@/components/AuthGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,19 +37,25 @@ export default async function RootLayout({
       >
         <nav className="w-full bg-black shadow-sm">
           <div className="mx-auto px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="text-xl font-semibold">
-              My Auth App
+            <Link href="/" className="text-xl font-semibold text-white hover:text-white/90 transition-colors">
+              Mi App de Autenticación
             </Link>
             <ul className="flex items-center justify-center gap-6 text-sm">
               <li>
-                <Link href="/dashboard" className="hover:text-gray-600">
-                  Dashboard
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center text-gray-200 hover:text-white/90 hover:bg-white/10 px-3 py-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  Panel
                 </Link>
               </li>
               {session?.user && (
                 <li>
-                  <Link href="/profile" className="hover:text-gray-600">
-                    Profile
+                  <Link
+                    href="/profile"
+                    className="inline-flex items-center text-gray-200 hover:text-white/90 hover:bg-white/10 px-3 py-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  >
+                    Perfil
                   </Link>
                 </li>
               )}
@@ -72,7 +79,9 @@ export default async function RootLayout({
           </div>
         </nav>
         <Provider>
-          <main>{children}</main>
+          <AuthGuard>
+            <main>{children}</main>
+          </AuthGuard>
         </Provider>
       </body>
     </html>
