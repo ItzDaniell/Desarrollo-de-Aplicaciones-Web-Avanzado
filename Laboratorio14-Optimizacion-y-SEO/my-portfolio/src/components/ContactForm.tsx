@@ -18,14 +18,12 @@ export default function ContactForm({ email }: { email: string }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        Envíame un Mensaje
-      </h2>
-      
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="space-y-4">
+      <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
+
+      <div className="border border-neutral-100 rounded-lg p-6 bg-white">
+        <div className="flex flex-col gap-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-neutral-500 mb-2">
               Nombre
             </label>
             <input
@@ -33,13 +31,13 @@ export default function ContactForm({ email }: { email: string }) {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Tu nombre"
+              className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-transparent text-neutral-900 outline-none focus:ring-2 focus:ring-black/5 focus:border-black/20"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-neutral-500 mb-2">
               Email
             </label>
             <input
@@ -47,13 +45,13 @@ export default function ContactForm({ email }: { email: string }) {
               id="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="tu@email.com"
+              className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-transparent text-neutral-900 outline-none focus:ring-2 focus:ring-black/5 focus:border-black/20"
             />
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="subject" className="block text-sm font-medium text-neutral-500 mb-2">
               Asunto
             </label>
             <input
@@ -61,13 +59,13 @@ export default function ContactForm({ email }: { email: string }) {
               id="subject"
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="¿Sobre qué quieres hablar?"
+              className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-transparent text-neutral-900 outline-none focus:ring-2 focus:ring-black/5 focus:border-black/20"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="message" className="block text-sm font-medium text-neutral-500 mb-2">
               Mensaje
             </label>
             <textarea
@@ -75,17 +73,17 @@ export default function ContactForm({ email }: { email: string }) {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               rows={5}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               placeholder="Cuéntame más sobre tu proyecto..."
+              className="w-full px-3 py-2 rounded-lg border border-neutral-200 bg-transparent text-neutral-900 outline-none focus:ring-2 focus:ring-black/5 focus:border-black/20"
             />
           </div>
 
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded px-4 py-2 font-semibold cursor-pointer bg-black text-white hover:bg-neutral-800 transition w-full"
           >
-            Enviar Mensaje
+            Enviar
           </button>
         </div>
       </div>

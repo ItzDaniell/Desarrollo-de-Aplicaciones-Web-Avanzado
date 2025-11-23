@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/'],
+        disallow: ['/api/', '/admin/', '/_next/', '/favicon.ico'],
       },
       {
         userAgent: 'Googlebot',
@@ -16,5 +16,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${personalInfo.siteUrl}/sitemap.xml`,
+    host: personalInfo.siteUrl,
   };
 }

@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      className="group block overflow-hidden hover:opacity-90 transition-opacity duration-200"
     >
       <div className="relative h-48 overflow-hidden">
         {/* Skeleton loading */}
@@ -24,11 +24,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       
       <div className="p-4">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-lg font-semibold mb-2 group-hover-accent transition-colors">
           {project.title}
         </h3>
         
-        <p className="text-gray-600 mb-4 line-clamp-2">
+        <p className="text-neutral-500 mb-4 line-clamp-2">
           {project.description}
         </p>
         
@@ -36,14 +36,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.technologies.slice(0, 3).map((tech) => (
             <span
               key={tech}
-              className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
+              className="text-xs bg-neutral-100 text-neutral-600 px-2 py-1 rounded"
             >
               {tech}
             </span>
           ))}
           
           {project.technologies.length > 3 && (
-            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+            <span className="text-xs bg-neutral-100 text-neutral-600 px-2 py-1 rounded">
               +{project.technologies.length - 3}
             </span>
           )}

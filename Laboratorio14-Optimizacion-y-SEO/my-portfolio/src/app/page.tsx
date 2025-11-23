@@ -19,19 +19,19 @@ const Home = () => {
             sizes="120px"
           />
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900">{personalInfo.name}</h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-5">{personalInfo.title}</p>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-8">{personalInfo.description}</p>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-neutral-900">{personalInfo.name}</h1>
+        <p className="text-xl md:text-2xl text-neutral-600 mb-5">{personalInfo.title}</p>
+        <p className="text-lg text-neutral-700 max-w-2xl mx-auto mb-8">{personalInfo.description}</p>
 
         <div className="flex gap-4 justify-center">
           <Link
             href="/projects"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            className="bg-black text-white px-6 py-3 rounded hover:bg-neutral-800 transition"
           > Ver Proyectos
           </Link>
           <Link
             href="/about"
-            className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition"
+            className="border border-neutral-200 text-neutral-900 px-6 py-3 rounded hover:bg-neutral-50 transition"
           > Sobre Mí
           </Link>
         </div>

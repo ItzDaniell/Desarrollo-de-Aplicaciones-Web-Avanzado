@@ -2,19 +2,17 @@ import { personalInfo } from '@/lib/data';
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-white py-8">
+        <footer className="py-8">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-gray-400 mb-4 md:mb-0">
-                        © {new Date().getFullYear()} {personalInfo.name}. Todos los derechos reservados.
-                    </p>
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-neutral-500 text-sm">© {new Date().getFullYear()} {personalInfo.name}</p>
 
-                    <div className="flex gap-6">
+                    <div className="flex gap-4 text-sm">
                         <a
                             href={personalInfo.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-white transition"
+                            className="text-neutral-500 hover:text-black transition"
                             aria-label="GitHub"
                         >
                             GitHub
@@ -24,7 +22,7 @@ export default function Footer() {
                             href={personalInfo.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-white transition"
+                            className="text-neutral-500 hover:text-black transition"
                             aria-label="LinkedIn"
                         >
                             LinkedIn
@@ -32,7 +30,7 @@ export default function Footer() {
 
                         <a
                             href={`mailto:${personalInfo.email}`}
-                            className="text-gray-400 hover:text-white transition"
+                            className="text-neutral-500 hover:text-black transition"
                             aria-label="Email"
                         >
                             Email

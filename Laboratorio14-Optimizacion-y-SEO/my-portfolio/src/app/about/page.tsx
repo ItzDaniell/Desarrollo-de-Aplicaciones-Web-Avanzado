@@ -46,7 +46,7 @@ export default function AboutPage() {
             <div className="prose text-gray-700 space-y-4">
               <p>
                 Soy un desarrollador full stack apasionado por crear experiencias
-                web excepcionales. Con más de X años de experiencia, me especializo
+                web excepcionales. Con más de 2 años de experiencia, me especializo
                 en construir aplicaciones modernas y escalables.
               </p>
               
