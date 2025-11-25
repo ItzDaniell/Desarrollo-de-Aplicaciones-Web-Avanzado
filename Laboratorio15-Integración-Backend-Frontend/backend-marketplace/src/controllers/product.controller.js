@@ -2,8 +2,15 @@ const { Product, Category } = require('../models')
 
 exports.getAllProducts = async (req, res) => {
   try {
+    const { categoryId } = req.query;
+    const whereClause = {};
+    if (categoryId) {
+      whereClause.CategoryId = categoryId;
+    }
+
     const products = await Product.findAll({
-      include: [{ model: Category, attributes: ['id', 'name'] }]
+      where: whereClause,
+      include: [{ model: Category, attributes: ['id', 'nombre'] }]
     });
     res.json({
       success: true,
@@ -23,7 +30,7 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id, {
-      include: [{ model: Category, attributes: ['id', 'name'] }]
+      include: [{ model: Category, attributes: ['id', 'nombre'] }]
     });
 
     if (!product) {
