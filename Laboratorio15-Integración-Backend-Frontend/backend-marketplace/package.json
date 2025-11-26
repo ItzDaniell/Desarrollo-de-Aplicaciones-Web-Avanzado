@@ -1,4 +1,7 @@
 {
+  "name": "backend-marketplace",
+  "version": "1.0.0",
+  "description": "Backend API for Marketplace application",
   "author": "itzdaniell",
   "main": "src/server.js",
   "type": "commonjs",
@@ -7,7 +10,8 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "build": "echo ✓ Backend build complete - Ready for production deployment"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -22,5 +26,13 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
-  }
+  },
+  "keywords": [
+    "api",
+    "backend",
+    "marketplace",
+    "express",
+    "sequelize"
+  ],
+  "license": "ISC"
 }

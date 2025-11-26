@@ -4,6 +4,9 @@ import CategoryFilter from '../../components/CategoryFilter';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
+// Mark this route as dynamic to avoid static generation warnings
+export const dynamic = 'force-dynamic';
+
 async function getProducts(categoryId?: string): Promise<Product[]> {
   try {
     const url = categoryId 

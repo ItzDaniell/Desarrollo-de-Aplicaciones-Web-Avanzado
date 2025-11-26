@@ -4,6 +4,9 @@ import { Product, Category, ApiResponse } from '@/types/products'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
+// Mark this route as dynamic to avoid static generation warnings
+export const dynamic = 'force-dynamic';
+
 async function getProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${API_URL}/products/${id}`, {
