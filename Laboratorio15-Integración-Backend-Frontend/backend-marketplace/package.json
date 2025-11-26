@@ -2,7 +2,6 @@
   "name": "backend-marketplace",
   "version": "1.0.0",
   "description": "Backend API for Marketplace application",
-  "author": "itzdaniell",
   "main": "src/server.js",
   "type": "commonjs",
   "engines": {
