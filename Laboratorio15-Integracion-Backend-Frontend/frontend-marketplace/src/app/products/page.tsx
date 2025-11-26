@@ -46,9 +46,10 @@ async function getCategories(): Promise<Category[]> {
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: { categoryId?: string };
+  searchParams: Promise<{ categoryId?: string }>;
 }) {
-  const products = await getProducts(searchParams.categoryId);
+  const params = await searchParams;
+  const products = await getProducts(params.categoryId);
   const categories = await getCategories();
 
   return (
