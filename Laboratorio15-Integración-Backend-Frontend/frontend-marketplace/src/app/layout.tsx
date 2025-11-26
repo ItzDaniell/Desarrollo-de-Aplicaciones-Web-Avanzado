@@ -17,8 +17,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen flex flex-col bg-gray-100">
+        {/* Navbar is now a Server Component using getServerSession */}
+        <Navbar />
         <Providers>
-          <Navbar />
           <main className="flex-1 bg-gray-100">
             {children}
           </main>

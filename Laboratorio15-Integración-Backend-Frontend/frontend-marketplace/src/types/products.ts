@@ -7,10 +7,11 @@ export interface Category {
 export interface Product {
     id: number;
     nombre: string;
-    precio: string;
+    precio: number;
     descripcion?: string;
     imageUrl?: string;
     CategoryId?: number;
+    categoryId?: number;
     Category?: Category;
     createdAt? : string;
     updatedAt: string
